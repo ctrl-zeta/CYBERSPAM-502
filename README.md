@@ -9,7 +9,7 @@ El fin de este proyecto es demostrar las vulnerabilidades en redes OT: falta de 
 
 Detecta si el servicio Modbus esta corriendo.
 
-[images.png]
+[image.png]
 
 ### modbus_findunitd:
 
