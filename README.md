@@ -5,3 +5,14 @@ El fin de este proyecto es demostrar las vulnerabilidades en redes OT: falta de 
 
 ## Metasploit para Modbus
 
+### modbusdetect:
+
+Detecta si el servicio Modbus esta corriendo.
+
+### modbus_findunitd:
+
+Prueba diferentes Unit IDs para descubrir con cual el esclavo responde.
+
+### modbus_banner_grabbing:
+
+Envia el Function Code 43 (Read Device Identification) para obtener informacion detallada del dispositivo.
