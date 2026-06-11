@@ -1,24 +1,12 @@
-```text
-  ____Fl_  __ ____  ____ ____  ____  ____  ____  __  _    ____  ____  ____ 
- / ___/\ \/ // __ )/ ___/  _ \/ ___||  _ \/ ___|/  |/ |  | ___|/ ___||___ \
-| |     \  /|  _  \___ \|  __/ ___ \| |_) \___ \| ||| |  |___ \| |  _  __) |
-| |___  / / | |_) |___) | |  | ___)|  __/ ___) | ||| |   ___) | |_| |/ __/ 
- \____|/_/  |____/_____/_|   \____/|_|   |____/|_|||_|  |____/ \____|_____|
-               [ SYSTEM COMPROMISED - BYPASS SUCCESSFUL ]
-
-```
-
 # 🔍 SCADA / Modbus Reconnaissance — Metasploit Modules
 
-> Documentación de módulos auxiliares de Metasploit para reconocimiento del protocolo Modbus (puerto 502/TCP).  
-> Uso exclusivo en entornos de laboratorio o con autorización expresa.
-
+Documentación de módulos auxiliares de Metasploit para el protocolo Modbus.  
 
 ---
 
 ## 1. Modbusdetect
 
-**Objetivo:** Detecta si el servicio Modbus está corriendo en el host objetivo.
+Detecta si el servicio Modbus está corriendo en el host objetivo.
 
 | Parámetro | Valor |
 |-----------|-------|
@@ -37,9 +25,7 @@ msf6 auxiliary(scanner/scada/modbusdetect) > run
 
 ## 2. Modbus\_FindUnitID
 
-**Objetivo:** Prueba diferentes Unit IDs para descubrir qué esclavos Modbus responden.
-
-> ⚠️ Ejecutar **después** de confirmar que el puerto 502 está abierto con `modbusdetect`.
+Prueba diferentes Unit IDs para descubrir qué esclavos Modbus responden.
 
 | Parámetro | Valor |
 |-----------|-------|
