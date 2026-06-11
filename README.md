@@ -5,3 +5,9 @@ El fin de este proyecto es demostrar las vulnerabilidades en redes OT: falta de 
 
 ## Ataque
 
+"Tras pivotar dentro de la red de una empresa de automatizacion, un atacante encontró un PLC ejecutando Modbus TCP sin autenticacion. Los administradores mantenian un brazo robotico que corria un loop infinito. El atacante utilizara Modbus TCP a su favor para ejecutar los movimientos del brazo como el quiera..."
+
+El administrador ejecuta continuamente un loop en el cual mueve una caja de A hacia B:
+
+
+En el dashboard se pueden ver los cambios en tiempo real:
