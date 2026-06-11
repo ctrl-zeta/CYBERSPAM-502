@@ -61,16 +61,21 @@ Los cambios pueden verse en tiempo real en el Dashboard:
 ## Mitigaciones contra ataques Modbus TCP
 
 1. Segmentación de red:
+
 Cualquier equipo en la red corporativa puede llegar directamente al PLC en el puerto 502 si no existe segmentacion de red. Con segmentación correcta, un firewall industrial separa la red OT de la red corporativa y solo el HMI autorizado puede alcanzar el PLC.
 
 2. Firewall con Deep Packet Inspection
+
 Un firewall industrial como Claroty, Dragos o Nozomi entiende el protocolo Modbus a nivel de función. Puede permitir FC 0x03 (lectura) desde cualquier IP, pero bloquear FC 0x06 y FC 0x10 (escritura) desde cualquier IP que no sea el HMI autorizado. El atacante puede ver el PLC pero no puede escribir en él.
 
 3. Whitelist de IPs en el PLC
+   
 Algunos PLCs permiten configurar desde qué IPs tienen permiso de escritura. Las demás solo pueden leer o directamente no reciben respuesta. Es la mitigación más simple y no requiere hardware adicional.
 
 4. Modbus Security TLS en puerto 802
+   
 Esta version añade cifrado TLS 1.2 y autenticación por certificados X.509. El problema es que muy pocos dispositivos lo soportan en la práctica.
 
-5. IDS industrial 
+5. IDS industrial
+   
 Herramientas como Nozomi Networks aprenden el comportamiento normal del HMI: qué IP escribe, qué registros toca, con qué frecuencia. Cuando el atacante aparece desde una IP desconocida escribiendo los mismos registros a mayor frecuencia, la alerta se dispara aunque el protocolo Modbus no lo detecte por sí solo.
