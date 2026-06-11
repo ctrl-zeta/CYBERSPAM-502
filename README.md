@@ -14,3 +14,46 @@ El administrador ejecuta continuamente un loop en el cual mueve una caja de A ha
 En el dashboard (Puerto 80) se pueden ver los cambios en tiempo real:
 
 ![Dashboard_1](Images/dashboard_1.png)
+
+El atacante utiliza LOCK (Ownsership) para poder ejecutar su secuencia de movimiento por encima del administrador. El LOCK (Ownership) responde a la siguiente pregunta, ¿Si estas personas quieren comunicarce con el brazo, entonces quien tiene prioridad?. En este escenario lo que se implemento es un mecanismo de control exclusivo inspirado en como PLCs industriales manejan el acceso recurrente.
+
+```
+SIN LOCK — bus compartido
+_____________________________________________________
+HMI Admin  --> escribe REG 100-105  ✓
+Atacante   --> escribe REG 100-105  ✓
+Resultado  : los movimientos se mezclan, el brazo enloquece
+
+CON LOCK — control exclusivo
+_____________________________________________________
+Atacante   --> escribe REG 200 = 0xA5A5
+ESP32      --> concede el lock al atacante
+               token = 0x7F3A | TTL = 15s | owner = sesión #1
+
+Atacante   --> escribe REG 100-105  ✓  (es el dueño)
+HMI Admin  --> escribe REG 100-105  ✗  (recibe excepción 0x06)
+
+Ctrl+C     --> atacante escribe REG 200 = 0x0000
+ESP32      --> lock liberado
+HMI Admin  --> reanuda automáticamente en ~1s
+
+REGISTROS DE CONTROL (REG 200-203)
+_____________________________________________________
+REG 200  REG_LOCK_CMD    0xA5A5 = lock activo / 0x0000 = libre
+REG 201  REG_LOCK_TOKEN  token aleatorio asignado por el ESP32
+REG 202  REG_LOCK_TTL    segundos restantes antes de auto-release
+REG 203  REG_LOCK_OWNER  ID de sesión TCP dueña del lock (0-7)
+
+HEARTBEAT — por qué es necesario
+_____________________________________________________
+TTL = 15s -> si el atacante no renueva en 15s, el lock expira
+Solución  -> hilo en background escribe 0xA5A5 cada 5s
+             esto reinicia el TTL y mantiene el lock vivo
+             mientras la secuencia del atacante corre
+```
+
+![Attack](Images/attack.png)
+
+Los cambios pueden verse en tiempo real en el Dashboard:
+
+![Dashboard_2](Images/dashboard_2.png)
