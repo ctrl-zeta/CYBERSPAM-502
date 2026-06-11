@@ -1,12 +1,14 @@
 # 🔍 SCADA / Modbus Reconnaissance — Metasploit Modules
 
-Documentación de módulos auxiliares de Metasploit para el protocolo Modbus.  
+> Documentación de módulos auxiliares de Metasploit para reconocimiento del protocolo Modbus (puerto 502/TCP).  
+> Uso exclusivo en entornos de laboratorio o con autorización expresa.
+
 
 ---
 
 ## 1. Modbusdetect
 
-Detecta si el servicio Modbus está corriendo en el host objetivo.
+**Objetivo:** Detecta si el servicio Modbus está corriendo en el host objetivo.
 
 | Parámetro | Valor |
 |-----------|-------|
@@ -25,7 +27,9 @@ msf6 auxiliary(scanner/scada/modbusdetect) > run
 
 ## 2. Modbus\_FindUnitID
 
-Prueba diferentes Unit IDs para descubrir qué esclavos Modbus responden.
+**Objetivo:** Prueba diferentes Unit IDs para descubrir qué esclavos Modbus responden.
+
+> ⚠️ Ejecutar **después** de confirmar que el puerto 502 está abierto con `modbusdetect`.
 
 | Parámetro | Valor |
 |-----------|-------|
