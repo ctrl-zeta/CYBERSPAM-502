@@ -11,4 +11,6 @@ El administrador ejecuta continuamente un loop en el cual mueve una caja de A ha
 
 ![HMI](Images/hmi.png)
 
-En el dashboard se pueden ver los cambios en tiempo real:
+En el dashboard (Puerto 80) se pueden ver los cambios en tiempo real:
+
+![Dashboard_1](Images/dashboard_1.png)
