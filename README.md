@@ -9,6 +9,6 @@ El fin de este proyecto es demostrar las vulnerabilidades en redes OT: falta de 
 
 El administrador ejecuta continuamente un loop en el cual mueve una caja de A hacia B:
 
-![HMI](images/hmi.png)
+![HMI](Images/hmi.png)
 
 En el dashboard se pueden ver los cambios en tiempo real:
