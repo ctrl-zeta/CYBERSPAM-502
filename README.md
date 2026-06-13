@@ -77,5 +77,17 @@ Los cambios pueden verse en tiempo real en el Dashboard:
   Esta version añade cifrado TLS 1.2 y autenticación por certificados X.509. El problema es que muy pocos dispositivos lo soportan en la práctica.
 
 5. IDS industrial:
-   
+
   Herramientas como Nozomi Networks aprenden el comportamiento normal del HMI: qué IP escribe, qué registros toca, con qué frecuencia. Cuando el atacante aparece desde una IP desconocida escribiendo los mismos registros a mayor frecuencia, la alerta se dispara aunque el protocolo Modbus no lo detecte por sí solo.
+
+
+
+<div align="center">
+  
+
+https://github.com/user-attachments/assets/49a8f809-69aa-42ff-ab25-303c82bd240f
+
+
+</div>
+
+
